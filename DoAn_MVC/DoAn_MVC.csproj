@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DoAn_API\DoAn_API.csproj" />
+  </ItemGroup>
+
 </Project>
