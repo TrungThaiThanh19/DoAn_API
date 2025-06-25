@@ -7,37 +7,23 @@ public class HoaDon
 {
     [Key]
     public Guid ID_HD { get; set; }
+    public Guid ID_NguoiDung { get; set; }
+    public Guid ID_VCH { get; set; }
+    public Guid ID_ThanhToan { get; set; }
+    public Guid ID_VanChuyen { get; set; }
+    public Guid ID_DiaChi { get; set; }
 
-    [Required]
-    public DateTime NgayLap { get; set; }
-
-    [Required]
-    [Range(0.01, double.MaxValue, ErrorMessage = "Tổng tiền phải lớn hơn 0.")]
+    public string TenKH { get; set; }
+    public string Sdt { get; set; }
     public decimal TongTien { get; set; }
-
-    public string TrangThai { get; set; } = "Pending"; // Default trạng thái là "Pending"
-
+    public int TrangThai { get; set; }
     public DateTime NgayTao { get; set; }
-    public DateTime? NgayCapNhat { get; set; }
-    public string NguoiTao { get; set; }
-    public string NguoiCapNhat { get; set; }
 
-    public Guid ID_KH { get; set; }
-    public Guid ID_NV { get; set; }
-    public Guid? ID_VCH { get; set; }
+    public virtual NguoiDung NguoiDung { get; set; }
+    public virtual Voucher Voucher { get; set; }
+    public virtual PhuongThucThanhToan ThanhToan { get; set; }
+    public virtual PhuongThucVanChuyen VanChuyen { get; set; }
+    public virtual DiaChi DiaChi { get; set; }
 
-    [ForeignKey("ID_KH")]
-    public KhachHang KhachHang { get; set; }
-
-    [ForeignKey("ID_NV")]
-    public NhanVien NhanVien { get; set; }
-
-    [ForeignKey("ID_VCH")]
-    public Voucher Voucher { get; set; }
-
-    public ICollection<HoaDonChiTiet>? CTHoaDons { get; set; }
-
-    // Tính toán tự động tổng tiền
-    [NotMapped]
-    public decimal CalculatedTongTien => CTHoaDons?.Sum(ct => ct.SoLuong * ct.Gia) ?? 0;
+    public virtual ICollection<HoaDonChiTiet> CTHoaDons { get; set; }
 }
